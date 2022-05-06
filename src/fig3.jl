@@ -35,10 +35,10 @@ function fig3()
 
 
     params = [
-        (; N = 2, D = 1., Δt = 0.02, step!fn = heun_step!, label="HeunP (non-symplectic)"),
-        (; N = 3, D = 1., Δt = 0.02, step!fn = midpoint_step!, label="Schrodinger midpoint, spin-1"),
-        (; N = 2, D = 1., Δt = 0.02, step!fn = midpoint_step!, label=raw"Schrodinger midpoint, spin-$\frac{1}{2}$"),
-        (; N = 0, D = 1., Δt = 0.02, step!fn = spherical_midpoint_step!, label="Spherical midpoint")
+        (; N = 2, D = -1., Δt = 0.02, step!fn = heun_step!, label="HeunP (non-symplectic)"),
+        (; N = 3, D = -1., Δt = 0.02, step!fn = midpoint_step!, label="Schrodinger midpoint, spin-1"),
+        (; N = 2, D = -1., Δt = 0.02, step!fn = midpoint_step!, label=raw"Schrodinger midpoint, spin-$\frac{1}{2}$"),
+        (; N = 0, D = -1., Δt = 0.02, step!fn = spherical_midpoint_step!, label="Spherical midpoint")
     ]
 
     data = map(params) do p

@@ -5,12 +5,12 @@ function fig4()
     ################################################################################
 
     function collect_trajectory_gsd(; Δt)
-        D = 1.0
+        D = -1.0
         N = 3
         L = 100
 
         Sz = spin_operators(N)[3]
-        Λ = fill(-D*Sz^2, L)
+        Λ = fill(D*Sz^2, L)
 
         sys = System(; N, L, periodic=true, J=-1.0, Λ)
 

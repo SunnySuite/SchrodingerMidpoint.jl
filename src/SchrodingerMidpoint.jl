@@ -149,8 +149,8 @@ function local_energy_and_gradient(sys::System{N}, s, i) where {N}
     end
 
     # LL easy axis, - D ∑ᵢ (nᵢᶻ)²
-    E += -sys.D*s[i][3]^2
-    ∇E += -Vec3(0, 0, 2sys.D*s[i][3])
+    E += sys.D*s[i][3]^2
+    ∇E += Vec3(0, 0, 2sys.D*s[i][3])
 
     # Zeeman coupling
     E += -sys.B ⋅ s[i]

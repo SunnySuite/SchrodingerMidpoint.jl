@@ -4,7 +4,7 @@ function fig1()
     # Classical LL-type anisotropy
     ################################################################################
     N = 3
-    D = 1.0
+    D = -1.0
     θ = (4/5)*(π/2)
     ω = 2cos(θ) # angular frequency proportional to B only
     Δt = 0.5
