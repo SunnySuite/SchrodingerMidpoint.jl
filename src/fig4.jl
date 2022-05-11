@@ -50,44 +50,29 @@ function fig4()
     ################################################################################
     # Plot results
     ################################################################################
-
-    xlabelfontsize = 16
-    ylabelfontsize = 16
-    xtickfontsize = 12
-    ytickfontsize = 12
-    legendfontsize = 12
-    linewidth=1.25
-    palette=:seaborn_colorblind
     colors = [1, 3, 2]
-
+    linewidth=1.25
+    plotparams = (;
+        xlabelfontsize = 16,
+        ylabelfontsize = 16,
+        xtickfontsize = 12,
+        ytickfontsize = 12,
+        legendfontsize = 12,
+        palette=:seaborn_colorblind,
+    )
 
     plt1 = plot(;
-                ylabel=L"$|\Delta H|$",
-                legend=:topright,
-                palette,
-                xlabelfontsize,
-                ylabelfontsize,
-                xtickfontsize,
-                ytickfontsize,
-                legendfontsize,
-                linewidth,
-                extra_plot_kwargs = KW(
-                :include_mathjax => "cdn",
-                :yaxis => KW(:automargin => true),
-                :xaxis => KW(:domain => "auto")
-                ),
+        plotparams...,
+        ylabel=L"$|\Delta H|$",
+        legend=:topright,
     )
+
     plt2 = plot(;
-                ylabel=L"$|\mathbf{s}_{60}|$",
-                xlabel="Time",
-                xrange=(0, 30),
-                xlabelfontsize,
-                ylabelfontsize,
-                palette,
-                xtickfontsize,
-                ytickfontsize,
-                linewidth,
-                legend=false,
+        plotparams...,
+        ylabel=L"$|\mathbf{s}_{60}|$",
+        xlabel="Time",
+        xrange=(0, 30),
+        legend=false,
     )
 
     for (p, (ts, es, ds), c) = zip(params, data, colors)
@@ -101,7 +86,6 @@ function fig4()
             title=["(a)" "(b)"],
             titleloc=:left,
     )
-    # savefig(plt, "fig4.pdf")
 
     return plt
 end

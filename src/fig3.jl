@@ -49,25 +49,23 @@ function fig3()
     ################################################################################
     # Plot results
     ################################################################################
-    xlabelfontsize = 16
-    ylabelfontsize = 16
-    xtickfontsize = 12
-    ytickfontsize = 12
-    legendfontsize = 12
-    linewidth = 1.1
-    palette=:seaborn_colorblind
     colors = [5, 1, 3, 2]
+    linewidth = 1.1
+    plotparams = (;
+        legendfontsize = 12,
+        xlabelfontsize = 16,
+        ylabelfontsize = 16,
+        xtickfontsize = 12,
+        ytickfontsize = 12,
+        linewidth = linewidth,
+        palette=:seaborn_colorblind,
+    )
 
 
     plt = plot(;
+            plotparams...,
             xlabel=raw"Time",
             ylabel=raw"$|\Delta H|$",
-            palette,
-            xlabelfontsize,
-            ylabelfontsize,
-            xtickfontsize,
-            ytickfontsize,
-            legendfontsize,
             yrange=(0, 0.025),
             legend=:topright,
     )
@@ -76,7 +74,6 @@ function fig3()
         plot!(plt, ts, es; label=p.label, linecolor=c, linewidth)
     end
 
-    # savefig(plt, "fig3.pdf")
     return plt
 
 end

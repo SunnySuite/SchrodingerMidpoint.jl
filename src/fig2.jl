@@ -50,58 +50,42 @@ function fig2()
     # Plot results
     ################################################################################
 
-    palette=:seaborn_colorblind
     colors = [5, 1, 3, 2]
-    xlabelfontsize = 16
-    ylabelfontsize = 16
-    xtickfontsize = 12
-    ytickfontsize = 12
-
     linewidth = 1.25
-    legendfontsize = 11
+    plotparams = (;
+        palette=:seaborn_colorblind,
+        xlabelfontsize = 16,
+        ylabelfontsize = 16,
+        xtickfontsize = 12,
+        ytickfontsize = 12,
+        linewidth = linewidth,
+        legendfontsize = 11,
+    )
 
     plt1 = plot(;
-                ylabel=raw"$|\Delta H|$",
-                yrange=(0, 5),
-                palette,
-                xlabelfontsize,
-                ylabelfontsize,
-                legendfontsize,
-                xtickfontsize,
-                ytickfontsize,
-                legend=:topleft,
-                xformatter=_->"",
-                # yformatter= y -> L"$%$(round(Int, y))×10^{0}$",
+        plotparams...,
+        ylabel=raw"$|\Delta H|$",
+        yrange=(0, 5),
+        legend=:topleft,
+        xformatter=_->"",
     )
 
     yticks2 = [1e-5, 3e-5, 5e-5]
     plt2 = plot(;
-                ylabel=raw"$|\Delta H|$",
-                yrange=(0, 5.5e-5),
-                yticks=yticks2,
-                palette,
-                xlabelfontsize,
-                ylabelfontsize,
-                legendfontsize,
-                xtickfontsize,
-                ytickfontsize,
-                legend=false,
-                xformatter=_->"",
-                # yformatter= y -> L"$%$(round(Int, y/(1e-5)))×10^{-5}$",
+        plotparams...,
+        ylabel=raw"$|\Delta H|$",
+        yrange=(0, 5.5e-5),
+        yticks=yticks2,
+        legend=false,
+        xformatter=_->"",
     )
 
     plt3 = plot(;
-                ylabel=raw"$|\Delta H|$",
-                yrange=(0, 9e-7),
-                xlabel=raw"Time",
-                palette,
-                xlabelfontsize,
-                ylabelfontsize,
-                legendfontsize,
-                xtickfontsize,
-                ytickfontsize,
-                legend=false,
-                # yformatter= y -> L"$%$(round(Int, y/(1e-7)))×10^{-7}$",
+        plotparams...,
+        ylabel=raw"$|\Delta H|$",
+        yrange=(0, 9e-7),
+        xlabel=raw"Time",
+        legend=false,
     )
 
     for (p, (ts, es), c) = zip(params, data, colors)
@@ -113,7 +97,6 @@ function fig2()
     plot!(plt3, ts, es; linecolor=colors[end], linewidth)
 
     p = plot(plt1, plt2, plt3, layout=grid(3, 1, heights=[0.45, 0.275, 0.275]))
-    # savefig(p, "fig2.pdf")
 
     return p
 end
