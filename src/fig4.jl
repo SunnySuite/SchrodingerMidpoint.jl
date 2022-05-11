@@ -81,10 +81,10 @@ function fig4()
     end
 
     plt = plot(plt1, plt2;
-            layout=grid(2, 1, heights=[0.5, 0.5]),
-            margin=1.5mm,
-            title=["(a)" "(b)"],
-            titleloc=:left,
+        layout=grid(2, 1, heights=[0.5, 0.5]),
+        margin=1.5mm,
+        title=["(a)" "(b)"],
+        titleloc=:left,
     )
 
     return plt
