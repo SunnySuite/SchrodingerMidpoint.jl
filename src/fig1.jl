@@ -31,62 +31,53 @@ function fig1()
 
 
     ## Plotting parameters
-    xlabelfontsize = 16
-    ylabelfontsize = 14
-    legendfontsize = 14
-    xtickfontsize = 12
-    ytickfontsize = 12
-    linewidth = 3.0
     color1 = 1
     color2 = 2
-    xlim=(0.0,10.0)
-    ylim=(-1.0,1.0)
-    xlabel=raw"Time"
-    ylabel="Spin component"
-    palette=:seaborn_colorblind
-    linealpha = 0.8
-    linealpharef = 0.85
+    plotparams = (;
+        xlabelfontsize = 16,
+        ylabelfontsize = 14,
+        legendfontsize = 14,
+        xtickfontsize = 12,
+        ytickfontsize = 12,
+        linewidth = 3.0,
+        xlim=(0.0,10.0),
+        ylim=(-1.0,1.0),
+        xlabel=raw"Time",
+        ylabel="Spin component",
+        palette=:seaborn_colorblind,
+        linealpha = 0.8,
+    )
+    plotparams_ref = (;
+        label=false,
+        linestyle=:dash,
+        linecolor=:black,
+        linealpha=0.85,
+    )
 
 
     p1 = plot(;
-        ylabel,
-        xlim,
-        ylim,
+        plotparams...,
         legend=:bottomright,
-        legendfontsize,
-        xlabelfontsize,
-        ylabelfontsize,
-        xtickfontsize,
-        ytickfontsize,
-        palette,
     )
 
     plot!(t_hist, sx_hist;
+        plotparams...,
         label=raw"$s^x(t)$",
         color=color1,
-        linewidth,
-        linealpha,
         xticks = (0.0:2.0:10.0, ["" for _ = 1:6]))
 
     plot!(p1, t_hist, sy_hist;
+        plotparams...,
         color=color2,
-        linealpha,
         label=raw"$s^y(t)$",
-        linewidth,
     )
 
     plot!(t2_hist, sin(θ) * cos.(ω*t2_hist);
-        label=false,
-        linestyle=:dash,
-        linecolor=:black,
-        linealpha=linealpharef,
+        plotparams_ref...,
     )
 
     plot!(p1, t2_hist, -sin(θ) * sin.(ω*t2_hist);
-        label=false,
-        linestyle=:dash,
-        linecolor=:black,
-        linealpha=linealpharef,
+        plotparams_ref...,
     )
 
 
@@ -113,46 +104,29 @@ function fig1()
 
     ## Plot results
     p2 = plot(;
-        xlabel,
-        ylabel,
-        xlim,
-        ylim,
+        plotparams...,
         legend=:none,
-        legendfontsize,
-        xlabelfontsize,
-        ylabelfontsize,
-        xtickfontsize,
-        ytickfontsize,
-        palette,
     )
 
 
     plot!(p2, t_hist, sx_hist_2;
-        linealpha,
-        linewidth,
+        plotparams...,
         label=raw"$s^x$",
         color=color1,
     )
 
     plot!(p2, t_hist, sy_hist_2;
-        linealpha,
+        plotparams...,
         color=color2,
         label=raw"$s^y$",
-        linewidth,
     )
 
     plot!(p2, t2_hist, sin(θ) * cos.(D*t2_hist);
-        label=false,
-        linestyle=:dash,
-        linecolor=:black,
-        linealpha=linealpharef,
+        plotparams_ref...,
     )
 
     plot!(p2, t2_hist, -cos(θ) * sin(θ) * sin.(D*t2_hist);
-        label=false,
-        linestyle=:dash,
-        linecolor=:black,
-        linealpha=linealpharef,
+        plotparams_ref...,
     )
 
     ## Final layout
@@ -160,7 +134,6 @@ function fig1()
         title=["(a)" "(b)"],
         titleloc=:left,
     )
-    # savefig(p, "fig1.pdf")
 
     return p
 end
